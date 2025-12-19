@@ -1,6 +1,6 @@
 public class Main {
     static void main() {
-        Supplier mainSupplier = new Supplier("Global Tech", "contact@globaltech.com");
+        Supplier mainSupplier = new Supplier("Lenovo", "contact@lenovo.com");
         Inventory warehouse = new Inventory("Main Warehouse", 500);
 
         Product p1 = new Product("Laptop", 400000.00, 15);
