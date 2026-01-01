@@ -1,5 +1,4 @@
 import java.util.Objects;
-
 public class Product{
     private String name;
     private double price;
