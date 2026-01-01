@@ -14,11 +14,43 @@ public class Inventory {
     }
 
     public void addProduct(Product product){
-        if(product.size()<totalCapacity){
+        if(products.size()<totalCapacity){
             products.add(product);
         }
         else{
             System.out.println("Invetory is full");
+        }
+    }
+
+    public void searchbyName(String name){
+        System.out.println("searching for: "+name);
+        for(Product product:products){
+            if(product.getName().equalsIgnoreCase(name)){
+                System.out.println(product);
+                return;
+            }
+        }
+    }
+
+    public void filterLowStock(int threshold){
+        System.out.println("filtering low stock");
+        for(Product product:products){
+            if(product.getQuantity()<threshold){
+                System.out.println(product);
+            }
+        }
+    }
+
+    public void sortByPrice(){
+        products.sort(Comparator.comparingDouble(Product::getPrice));
+        System.out.println("Sorted by price");
+        displayAll();
+    }
+
+    public void displayAll(){
+        System.out.println("Inventory at location: "+location);
+        for(Product product:products){
+            System.out.println(product);
         }
     }
 
