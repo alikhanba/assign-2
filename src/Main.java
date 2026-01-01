@@ -1,23 +1,53 @@
+import java.util.Scanner;
+
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Supplier mainSupplier = new Supplier("Lenovo", "contact@lenovo.com");
         Inventory warehouse = new Inventory("Main Warehouse", 500);
 
-        Product p1 = new Product("Laptop", 400000.00, 15);
-        Product p2 = new Product("Mouse", 15000.00, 15);
+
+        warehouse.addProduct(new Product("Laptop", 400000.00, 15));
+        warehouse.addProduct(new Product("Mouse", 15000.00, 15));
+        warehouse.addProduct(new Electronics("Smartphone",300000.00,3,"Samsung"));
 
         System.out.println("System Setup");
         System.out.println(mainSupplier);
-        System.out.println(warehouse);
-        System.out.println("\nCurrent Products");
-        System.out.println(p1);
-        System.out.println(p2);
+        System.out.println(warehouse.getLocation());
 
-        System.out.println("\nStock Comparison");
-        if (p1.getQuantity() == p2.getQuantity()) {
-            System.out.println("Both " + p1.getName() + " and " + p2.getName() + " have the same stock level: " + p1.getQuantity());
-        } else {
-            System.out.println("Stock levels are different.");
+        boolean running  = true;
+        while(running){
+            System.out.println("inventory menu");
+            System.out.println("1. Display All Products");
+            System.out.println("2. Search product");
+            System.out.println("3. Filter low stock");
+            System.out.println("4. Sort by price");
+            System.out.println("5. Exit ");
+            System.out.print("choice: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice){
+                case 1:
+                    warehouse.displayAll();
+                    break;
+                case 2:
+                    System.out.println("Enter product name: ");
+                    warehouse.searchbyName(sc.nextLine());
+                    break;
+                case 3:
+                    System.out.println("Enter threshold: ");
+                    warehouse.filterLowStock(sc.nextInt());
+                    break;
+                case 4:
+                    warehouse.sortByPrice();
+                    break;
+                case 5:
+                    running = false;
+                    break;
+                    default:
+                        System.out.println("Invalid choice");
+            }
         }
+        sc.close();
     }
 }
